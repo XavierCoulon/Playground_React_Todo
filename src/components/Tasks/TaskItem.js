@@ -8,8 +8,11 @@ const TaskItem = (props) => {
   };
 
   return (
-    <li>
-      {props.description} - {props.priority}
+    <li className="flex justify-between">
+      <span className="flex items-center">
+        {props.description} - {props.priority} - {props.date}
+      </span>
+
       <Button type="sumbit" label="Delete" onClick={deleteHandler} />
     </li>
   );

@@ -8,7 +8,7 @@ import TasksList from "./components/Tasks/TasksList";
 const App = () => {
   const [tasksList, setTasksList] = useState([]);
 
-  const addTaskHandler = (taskDescription, taskPriority) => {
+  const addTaskHandler = (taskDescription, taskPriority, taskDate) => {
     setTasksList((previousTasks) => {
       return [
         ...previousTasks,
@@ -16,6 +16,7 @@ const App = () => {
         {
           description: taskDescription,
           priority: taskPriority,
+          date: taskDate,
           id: Math.random().toString(),
         },
       ];
@@ -29,7 +30,7 @@ const App = () => {
   };
 
   return (
-    <div className="text-l">
+    <div className="flex flex-col justify-items-center">
       <AddTask onAddTask={addTaskHandler} />
       <TasksList tasks={tasksList} onDeleteTask={deleteTaskHandler} />
     </div>
