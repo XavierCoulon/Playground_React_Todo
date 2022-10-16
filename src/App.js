@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import "./index.css";
+
 import AddTask from "./components/Tasks/AddTask";
 import TasksList from "./components/Tasks/TasksList";
 
@@ -27,7 +29,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="text-l">
       <AddTask onAddTask={addTaskHandler} />
       <TasksList tasks={tasksList} onDeleteTask={deleteTaskHandler} />
     </div>
