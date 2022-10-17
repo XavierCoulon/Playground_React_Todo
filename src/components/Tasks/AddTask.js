@@ -1,18 +1,29 @@
 import React, { useState } from "react";
 import Button from "../UI/Button";
+import ErrorModal from "../UI/ErrorModal";
 
 const AddTask = (props) => {
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredPriority, setEnteredPriority] = useState("Normal");
-  const [enteredDate, setEnteredDate] = useState(new Date());
+  const [enteredDate, setEnteredDate] = useState("");
+  const [error, setError] = useState();
 
   const addTaskHandler = (event) => {
     event.preventDefault();
+
+    if (enteredDescription.trim().length === 0) {
+      setError({
+        title: "Invalid input",
+        message: "Please enter a description.",
+      });
+      return;
+    }
+
     props.onAddTask(enteredDescription, enteredPriority, enteredDate);
 
     setEnteredDescription("");
     setEnteredPriority("Normal");
-    setEnteredDate(new Date());
+    setEnteredDate("");
   };
 
   const descriptionHandler = (event) => {
@@ -27,8 +38,19 @@ const AddTask = (props) => {
     setEnteredDate(event.target.value);
   };
 
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <div>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <form className="flex flex-col w-80 mb-4" onSubmit={addTaskHandler}>
         <div className="flex flex-row">
           <label htmlFor="description">Description</label>
@@ -44,7 +66,6 @@ const AddTask = (props) => {
           <select
             name="priority"
             value={enteredPriority}
-            // defaultValue={enteredPriority}
             id="priority"
             onChange={priorityHandler}
           >

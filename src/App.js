@@ -30,7 +30,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col justify-items-center">
+    <div className="flex flex-col ">
       <AddTask onAddTask={addTaskHandler} />
       <TasksList tasks={tasksList} onDeleteTask={deleteTaskHandler} />
     </div>
